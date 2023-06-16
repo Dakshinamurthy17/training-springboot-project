@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot_project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot_project
+  template:
+    metadata:
+      labels:
+        app: springboot_project
+    spec:
+      containers:
+        - name: springboot_project
+          image: 315146163818.dkr.ecr.ap-south-1.amazonaws.com/springboot_project:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: AWS_DEFAULT_REGION
+              value: ap-south-1
+          imagePullSecrets:
+            - name: ecr-registry
